@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>City of Metropolis | Home</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="white" opacity="0.1"><path d="M0,20 Q250,80 500,50 T1000,30 V100 H0 Z"/></svg>');
+            background-size: cover;
+            background-position: bottom;
+        }
+        
+        .top-bar {
+            background: rgba(0,0,0,0.2);
+            padding: 8px 0;
+            font-size: 14px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .nav-main {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 10px 15px;
+            border-radius: 5px;
+        }
+        
+        .nav-links a:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+        
+        .hero {
+            text-align: center;
+            padding: 60px 0;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            margin: 20px;
+            border-radius: 15px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+            background: linear-gradient(45deg, #fff, #e0e7ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            opacity: 0.95;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            box-shadow: 0 4px 15px rgba(255,107,107,0.4);
+        }
+        
+        .btn-secondary {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 2px solid white;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+        
+        .quick-services {
+            background: #f8f9ff;
+            padding: 60px 0;
+            position: relative;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: #2c3e50;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(45deg, #1e3c72, #2a5298);
+            border-radius: 2px;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        
+        .service-card .icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #1e3c72, #2a5298);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .service-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        
+        .service-card p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+        
+        .news-events {
+            padding: 80px 0;
+            background: white;
+        }
+        
+        .news-events-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 60px;
+            margin-top: 50px;
+        }
+        
+        .news-item {
+            border-bottom: 1px solid #eee;
+            padding-bottom: 25px;
+            margin-bottom: 25px;
+            transition: all 0.3s ease;
+        }
+        
+        .news-item:hover {
+            transform: translateX(10px);
+        }
+        
+        .news-date {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        
+        .news-item h3 {
+            color: #1e3c72;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+        
+        .news-item h3:hover {
+            color: #2a5298;
+        }
+        
+        .events-list {
+            background: #f8f9ff;
+            padding: 30px;
+            border-radius: 15px;
+            height: fit-content;
+        }
+        
+        .event-item {
+            display: flex;
+            gap: 20px;
+            padding: 20px 0;
+            border-bottom: 1px solid #e0e7ff;
+        }
+        
+        .event-date {
+            background: linear-gradient(45deg, #1e3c72, #2a5298);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            min-width: 80px;
+            height: fit-content;
+        }
+        
+        .event-date .day {
+            font-size: 24px;
+            font-weight: bold;
+            display: block;
+        }
+        
+        .event-date .month {
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+        
+        .event-details h4 {
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        
+        .event-time {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .footer {
+            background: #1a252f;
+            color: white;
+            padding: 60px 0 20px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer h3 {
+            margin-bottom: 20px;
+            color: #64b5f6;
+        }
+        
+        .footer ul {
+            list-style: none;
+        }
+        
+        .footer ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer ul li a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer ul li a:hover {
+            color: #64b5f6;
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid #333;
+            padding-top: 20px;
+            text-align: center;
+            color: #999;
+        }
+        
+        .mobile-menu {
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu {
+                display: block;
+                background: none;
+                border: none;
+                color: white;
+                font-size: 24px;
+                cursor: pointer;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .news-events-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+        
+        .search-widget {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="top-bar">
+            <div class="container">
+                <span>🌡️ 74°F | 📅 Wednesday, September 17, 2025 | ⚠️ City Council Meeting Tonight 7PM</span>
+            </div>
+        </div>
+        
+        <nav class="nav-main">
+            <div class="container">
+                <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                    <div class="logo">🏙️ City of Metropolis</div>
+                    <ul class="nav-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#government">Government</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#business">Business</a></li>
+                        <li><a href="#recreation">Recreation</a></li>
+                        <li><a href="#residents">Residents</a></li>
+                    </ul>
+                    <button class="mobile-menu" onclick="toggleMobileMenu()">☰</button>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="hero">
+            <div class="container">
+                <h1>Welcome to Metropolis</h1>
+                <p>The City of Tomorrow, Today. Discover a vibrant community where innovation meets tradition, and every resident is part of our shared success story.</p>
+                <div class="cta-buttons">
+                    <a href="#services" class="btn btn-primary">City Services</a>
+                    <a href="#contact" class="btn btn-secondary">Contact Us</a>
+                </div>
+                
+                <div class="search-widget">
+                    <input type="text" class="search-input" placeholder="Search city services, departments, or information..." id="searchInput">
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <section class="quick-services">
+        <div class="container">
+            <h2 class="section-title">I Want To...</h2>
+            <div class="services-grid">
+                <div class="service-card" onclick="handleServiceClick('pay-bills')">
+                    <div class="icon">💳</div>
+                    <h3>Pay Bills Online</h3>
+                    <p>Quickly pay your utility bills, parking tickets, and city fees online.</p>
+                    <a href="#" class="btn btn-secondary">Pay Now</a>
+                </div>
+                
+                <div class="service-card" onclick="handleServiceClick('permits')">
+                    <div class="icon">📋</div>
+                    <h3>Apply for Permits</h3>
+                    <p>Building permits, business licenses, and special event applications.</p>
+                    <a href="#" class="btn btn-secondary">Apply</a>
+                </div>
+                
+                <div class="service-card" onclick="handleServiceClick('report')">
+                    <div class="icon">🚨</div>
+                    <h3>Report an Issue</h3>
+                    <p>Report potholes, streetlight outages, or other city maintenance needs.</p>
+                    <a href="#" class="btn btn-secondary">Report</a>
+                </div>
+                
+                <div class="service-card" onclick="handleServiceClick('jobs')">
+                    <div class="icon">💼</div>
+                    <h3>Find Employment</h3>
+                    <p>Browse current job openings with the City of Metropolis.</p>
+                    <a href="#" class="btn btn-secondary">Browse Jobs</a>
+                </div>
+                
+                <div class="service-card" onclick="handleServiceClick('recreation')">
+                    <div class="icon">🏊</div>
+                    <h3>Recreation Programs</h3>
+                    <p>Register for fitness classes, sports leagues, and community events.</p>
+                    <a href="#" class="btn btn-secondary">Register</a>
+                </div>
+                
+                <div class="service-card" onclick="handleServiceClick('trash')">
+                    <div class="icon">🗑️</div>
+                    <h3>Waste & Recycling</h3>
+                    <p>Schedule pickup, find collection days, and recycling guidelines.</p>
+                    <a href="#" class="btn btn-secondary">Schedule</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="news-events">
+        <div class="container">
+            <div class="news-events-grid">
+                <div>
+                    <h2 class="section-title" style="text-align: left;">City News</h2>
+                    
+                    <article class="news-item">
+                        <div class="news-date">September 15, 2025</div>
+                        <h3>Metropolis Wins Smart City Innovation Award</h3>
+                        <p>The city's new AI-powered traffic management system has reduced commute times by 23% and earned national recognition.</p>
+                    </article>
+                    
+                    <article class="news-item">
+                        <div class="news-date">September 12, 2025</div>
+                        <h3>New Downtown Waterfront Park Opens October 1st</h3>
+                        <p>The $12 million Riverside Commons features walking trails, playgrounds, and an outdoor amphitheater for community events.</p>
+                    </article>
+                    
+                    <article class="news-item">
+                        <div class="news-date">September 10, 2025</div>
+                        <h3>Metropolis Announces Fiber Internet Expansion</h3>
+                        <p>High-speed internet access will be available to all residents by end of year, supporting remote work and digital education.</p>
+                    </article>
+                    
+                    <article class="news-item">
+                        <div class="news-date">September 8, 2025</div>
+                        <h3>Fall Festival Registration Now Open</h3>
+                        <p>Vendors and performers wanted for the annual Harvest Moon Festival on October 15-17. Online registration available.</p>
+                    </article>
+                </div>
+                
+                <div>
+                    <h2 class="section-title" style="text-align: left;">Upcoming Events</h2>
+                    <div class="events-list">
+                        <div class="event-item">
+                            <div class="event-date">
+                                <span class="day">17</span>
+                                <span class="month">Sep</span>
+                            </div>
+                            <div class="event-details">
+                                <h4>City Council Meeting</h4>
+                                <div class="event-time">7:00 PM - City Hall</div>
+                            </div>
+                        </div>
+                        
+                        <div class="event-item">
+                            <div class="event-date">
+                                <span class="day">20</span>
+                                <span class="month">Sep</span>
+                            </div>
+                            <div class="event-details">
+                                <h4>Farmers Market</h4>
+                                <div class="event-time">8:00 AM - Downtown Square</div>
+                            </div>
+                        </div>
+                        
+                        <div class="event-item">
+                            <div class="event-date">
+                                <span class="day">22</span>
+                                <span class="month">Sep</span>
+                            </div>
+                            <div class="event-details">
+                                <h4>Community Clean-up Day</h4>
+                                <div class="event-time">9:00 AM - Various Locations</div>
+                            </div>
+                        </div>
+                        
+                        <div class="event-item">
+                            <div class="event-date">
+                                <span class="day">25</span>
+                                <span class="month">Sep</span>
+                            </div>
+                            <div class="event-details">
+                                <h4>Public Safety Town Hall</h4>
+                                <div class="event-time">6:30 PM - Community Center</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <h3>City Hall</h3>
+                    <p>📍 123 Main Street<br>
+                    Metropolis, FL 34567<br>
+                    📞 (555) 123-4567<br>
+                    ✉️ info@metropolis.gov</p>
+                    <p><strong>Hours:</strong><br>
+                    Monday - Friday: 8:00 AM - 5:00 PM</p>
+                </div>
+                
+                <div>
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#">Pay Bills Online</a></li>
+                        <li><a href="#">Apply for Permits</a></li>
+                        <li><a href="#">Report Issues</a></li>
+                        <li><a href="#">Meeting Agendas</a></li>
+                        <li><a href="#">Budget Documents</a></li>
+                        <li><a href="#">Job Opportunities</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3>Departments</h3>
+                    <ul>
+                        <li><a href="#">Public Works</a></li>
+                        <li><a href="#">Parks & Recreation</a></li>
+                        <li><a href="#">Police Department</a></li>
+                        <li><a href="#">Fire Department</a></li>
+                        <li><a href="#">Planning & Zoning</a></li>
+                        <li><a href="#">Utilities</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3>Stay Connected</h3>
+                    <p>Follow us for the latest city news and updates:</p>
+                    <div style="margin-top: 15px;">
+                        <a href="#" style="font-size: 24px; margin-right: 15px;">📘</a>
+                        <a href="#" style="font-size: 24px; margin-right: 15px;">🐦</a>
+                        <a href="#" style="font-size: 24px; margin-right: 15px;">📷</a>
+                        <a href="#" style="font-size: 24px;">💼</a>
+                    </div>
+                    <div style="margin-top: 20px;">
+                        <strong>Emergency:</strong> 911<br>
+                        <strong>Non-Emergency:</strong> (555) 123-4567
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 City of Metropolis. All rights reserved. | <a href="#" style="color: #64b5f6;">Privacy Policy</a> | <a href="#" style="color: #64b5f6;">Accessibility</a> | <a href="#" style="color: #64b5f6;">Website Feedback</a></p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Search functionality
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                const searchTerm = this.value.toLowerCase();
+                if (searchTerm) {
+                    alert(`Searching for: "${searchTerm}"\n\nIn a real implementation, this would redirect to search results.`);
+                }
+            }
+        });
+        
+        // Service card interactions
+        function handleServiceClick(service) {
+            const services = {
+                'pay-bills': 'Online Bill Payment Portal',
+                'permits': 'Permit Application System',
+                'report': 'Issue Reporting System',
+                'jobs': 'Employment Opportunities',
+                'recreation': 'Recreation Program Registration',
+                'trash': 'Waste Management Services'
+            };
+            
+            alert(`Redirecting to: ${services[service]}\n\nIn a real implementation, this would navigate to the appropriate page.`);
+        }
+        
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            if (navLinks.style.display === 'flex') {
+                navLinks.style.display = 'none';
+            } else {
+                navLinks.style.display = 'flex';
+                navLinks.style.flexDirection = 'column';
+                navLinks.style.position = 'absolute';
+                navLinks.style.top = '100%';
+                navLinks.style.left = '0';
+                navLinks.style.right = '0';
+                navLinks.style.background = 'rgba(30,60,114,0.95)';
+                navLinks.style.padding = '20px';
+                navLinks.style.zIndex = '1000';
+            }
+        }
+        
+        // News item click handlers
+        document.querySelectorAll('.news-item h3').forEach(item => {
+            item.addEventListener('click', function() {
+                alert(`Reading: "${this.textContent}"\n\nIn a real implementation, this would show the full article.`);
+            });
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                if (this.getAttribute('href') !== '#') {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
+        });
+        
+        // Add some interactive animations
+        window.addEventListener('scroll', function() {
+            const cards = document.querySelectorAll('.service-card, .news-item');
+            cards.forEach(card => {
+                const rect = card.getBoundingClientRect();
+                if (rect.top < window.innerHeight && rect.bottom > 0) {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }
+            });
+        });
+        
+        // Initialize card animations
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.service-card, .news-item');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = `all 0.6s ease ${index * 0.1}s`;
+            });
+            
+            // Trigger initial animation
+            setTimeout(() => {
+                window.dispatchEvent(new Event('scroll'));
+            }, 100);
+        });
+    </script>
+</body>
+</html>
